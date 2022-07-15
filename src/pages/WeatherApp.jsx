@@ -28,10 +28,6 @@ export const WeatherApp = ({ match }) => {
     dispatch(getSearchResults());
   }, []);
 
-  const onSelectString = (searchBy) => {
-    if (searchBy) console.log('searchBy:', searchBy);
-  };
-
   const onSelectLocation = (location) => {
     dispatch(getWeatherByLocation(location));
   };
@@ -76,7 +72,6 @@ export const WeatherApp = ({ match }) => {
       <WeatherSearch
         onSearch={utilService.debounce(onSearch)}
         onSelectLocation={onSelectLocation}
-        onSelectString={onSelectString}
         searchResults={searchResults}
       />
       <WeatherCard
