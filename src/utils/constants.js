@@ -1,4 +1,4 @@
-export { ApiKey, ResourceTypes, DefaultLocation, IsProduction, UserMsgTypes };
+export { ApiKey, ResourceTypes, DefaultLocation, UserMsgTypes };
 
 const ApiKey = 'xUb6xc8a3mlSpCpAuPdCGpG53iIhyKPh';
 

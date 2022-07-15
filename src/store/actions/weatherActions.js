@@ -5,8 +5,6 @@ import { utilService } from '../../services/util.service';
 export function getWeatherByLocation(location = DefaultLocation) {
   return async (dispatch) => {
     try {
-      // TODO - change to Promise.all? Split into two actions?
-      // TODO - get the set location out into its own thing just like searchBy
       const locationKey = location.Key;
       const currentConditions = await weatherService.getCurrentConditions(locationKey);
       const dailyForecast = await weatherService.getDailyForecast(locationKey);
