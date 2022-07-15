@@ -1,0 +1,21 @@
+.favorites-page {
+  > * {
+    text-align: center;
+  }
+  .favorites-list {
+    justify-content: left;
+    gap: 40px;
+    margin: 20px 0;
+    .favorite-card {
+      > * {
+        text-align: center;
+      }
+      img {
+        object-fit: contain;
+      }
+      svg {
+        font-size: 2.5rem;
+      }
+    }
+  }
+}

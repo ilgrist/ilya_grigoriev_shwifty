@@ -1,0 +1,47 @@
+/* Breakpoint mixins - Mobile First */
+@mixin from-mobile-layout {
+  @media (min-width: $mobile-breakpoint) {
+    @content;
+  }
+}
+
+@mixin from-normal-layout {
+  @media (min-width: $tablet-breakpoint) {
+    @content;
+  }
+}
+
+@mixin from-wide-layout {
+  @media (min-width: $wide-breakpoint) {
+    @content;
+  }
+}
+
+/* Media  Mixins */
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  overflow: hidden;
+
+  &:before {
+    display: block;
+    content: '';
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+    pointer-events: none;
+  }
+
+  & > img,
+  & > iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  > img {
+    object-fit: cover;
+  }
+}

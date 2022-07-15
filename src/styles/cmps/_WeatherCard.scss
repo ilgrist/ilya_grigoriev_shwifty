@@ -1,0 +1,100 @@
+.weather-card {
+  display: grid;
+  padding: 15px;
+  grid-template-columns: 250px 1fr 170px;
+  grid-template-rows: 150px 180px;
+  > * {
+    text-align: center;
+  }
+  .conditions {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    img {
+      object-fit: cover;
+      flex-grow: 0;
+      flex-shrink: 0;
+      flex-basis: 50px;
+      max-width: 100px;
+    }
+    .conditions-card {
+      padding: 0;
+      .MuiCardContent-root {
+        padding: 0;
+      }
+    }
+  }
+  .favorite-btn-cont {
+    grid-column: 3/4;
+    grid-row: 1/2;
+    .favorite-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      gap: 10px;
+      border: none;
+      background-color: transparent;
+      span {
+        display: none;
+      }
+    }
+  }
+  .weather-text-cont {
+    grid-column: 1 / end;
+    grid-row: 2 / 3;
+    flex-direction: column;
+    gap: 20px;
+    .prefix {
+      font-size: 2rem;
+      font-style: italic;
+    }
+    .weather-text {
+      font-size: 5rem;
+      font-weight: bold;
+    }
+  }
+  .daily-forecasts {
+    grid-column: 1 / end;
+    grid-row: 3 / 4;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 150px);
+    grid-gap: 20px;
+    margin: 20px;
+    justify-content: center;
+    > * {
+      text-align: center;
+    }
+    .forecast-card {
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px 0;
+    }
+  }
+  @include from-wide-layout {
+    min-width: 1000px;
+    padding: 15px;
+    grid-template-columns: 300px 1fr 200px;
+    grid-template-rows: 150px 200px 180px;
+    .conditions {
+      img {
+        max-width: none;
+      }
+      .conditions-card {
+        padding: 0;
+        .MuiCardContent-root {
+          padding: 0;
+        }
+      }
+    }
+    .favorite-btn-cont {
+      .favorite-btn {
+        span {
+          display: block;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+.autocomplete-cont {
+  height: 80px;
+  width: 300px;
+  @include from-mobile-layout {
+    width: 500px;
+  }
+}
