@@ -1,6 +1,6 @@
-import { ResourceTypes, ApiKey, IsProduction } from '../utils/constants';
+import { ResourceTypes, ApiKey } from '../utils/constants';
 
-const BASE_URL = 'http://dataservice.accuweather.com/';
+const BASE_URL = 'https://dataservice.accuweather.com/';
 
 export const weatherService = {
   getCurrentConditions,
