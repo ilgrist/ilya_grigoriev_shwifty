@@ -23,7 +23,6 @@ export const WeatherApp = ({ match }) => {
     handleLoad();
   }, [match.params.id]);
 
-  // TODO - why callback (from Robots file)?
   const onSearch = useCallback((txt) => {
     dispatch(setSearchBy(txt));
     dispatch(getSearchResults());

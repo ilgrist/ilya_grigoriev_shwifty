@@ -1,7 +1,7 @@
 import { ResourceTypes, ApiKey, IsProduction } from '../utils/constants';
 
 const BASE_URL =
-  process.env.NODE_ENV !== 'development'
+  process.env.NODE_ENV === 'production'
     ? 'http://dataservice.accuweather.com/'
     : '//localhost:3000/api/weather';
 
