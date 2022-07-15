@@ -1,9 +1,9 @@
 import { ResourceTypes, ApiKey, IsProduction } from '../utils/constants';
-const sampleCurrConditions = require('../data/sample-currentConditions.json');
-const sampleDailyForecast = require('../data/sample-fiveDayJeru.json');
-const sampleSearchResults = require('../data/sample-autocomplete.json');
 
-const BASE_URL = 'http://dataservice.accuweather.com/';
+const BASE_URL =
+  process.env.NODE_ENV !== 'development'
+    ? 'http://dataservice.accuweather.com/'
+    : '//localhost:3000/api/weather';
 
 export const weatherService = {
   getCurrentConditions,
@@ -12,33 +12,21 @@ export const weatherService = {
 };
 
 async function getCurrentConditions(locationKey) {
-  if (IsProduction) {
-    const url = `${BASE_URL}${ResourceTypes.CurrentConditions}${locationKey}?apikey=${ApiKey}`;
-    const res = await _get(url);
-    return res[0];
-  } else {
-    return sampleCurrConditions[0];
-  }
+  const url = `${BASE_URL}${ResourceTypes.CurrentConditions}${locationKey}?apikey=${ApiKey}`;
+  const res = await _get(url);
+  return res[0];
 }
 
 async function getDailyForecast(locationKey) {
-  if (IsProduction) {
-    const url = `${BASE_URL}${ResourceTypes.FiveDays}${locationKey}?apikey=${ApiKey}&metric=true`;
-    const res = await _get(url);
-    return res;
-  } else {
-    return sampleDailyForecast;
-  }
+  const url = `${BASE_URL}${ResourceTypes.FiveDays}${locationKey}?apikey=${ApiKey}&metric=true`;
+  const res = await _get(url);
+  return res;
 }
+
 async function getSearchResults(searchBy) {
-  if (IsProduction) {
-    const url = `${BASE_URL}${ResourceTypes.Autocomplete}?apikey=${ApiKey}&metric=true&q=${searchBy}`;
-    const res = await _get(url);
-    return res;
-  } else {
-    const randomIdx = Math.floor(Math.random() * sampleSearchResults.length);
-    return sampleSearchResults.slice(randomIdx);
-  }
+  const url = `${BASE_URL}${ResourceTypes.Autocomplete}?apikey=${ApiKey}&metric=true&q=${searchBy}`;
+  const res = await _get(url);
+  return res;
 }
 
 async function _get(url) {

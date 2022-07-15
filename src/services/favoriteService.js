@@ -2,7 +2,6 @@ import { storageService } from './async-storage.service';
 import { utilService } from './util.service';
 
 const FAVORITE_KEY = 'favorites';
-_createFavorites();
 
 export const favoriteService = {
   query,
@@ -36,13 +35,4 @@ async function remove(favoriteId) {
 
 function getEmptyFavorite() {
   return { location: '', currentConditions: '', dailyForecast: '' };
-}
-
-function _createFavorites() {
-  let favorites = utilService.loadFromStorage(FAVORITE_KEY);
-  if (!favorites || !favorites.length) {
-    const favorites = require('../data/locs.json');
-    utilService.saveToStorage(FAVORITE_KEY, favorites);
-  }
-  return favorites;
 }

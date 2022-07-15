@@ -9,8 +9,6 @@ const ResourceTypes = {
   Autocomplete: 'locations/v1/cities/autocomplete',
 };
 
-const IsProduction = process.env.NODE_ENV === 'production';
-
 const DefaultLocation = {
   Version: 1,
   Key: '215854',
