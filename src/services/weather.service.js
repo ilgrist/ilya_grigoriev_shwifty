@@ -1,6 +1,9 @@
 import { ResourceTypes, ApiKey } from '../utils/constants';
 
-const BASE_URL = 'https://dataservice.accuweather.com/';
+const BASE_URL =
+  process.env.NODE_ENV !== 'development'
+    ? 'https://dataservice.accuweather.com/'
+    : '//localhost:3000/';
 
 export const weatherService = {
   getCurrentConditions,
