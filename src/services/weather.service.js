@@ -1,7 +1,7 @@
 import { ResourceTypes, ApiKey } from '../utils/constants';
 
 const BASE_URL =
-  process.env.NODE_ENV !== 'development'
+  REACT_APP_NODE_ENV !== 'development'
     ? 'https://dataservice.accuweather.com/'
     : '//localhost:3000/api/weather';
 
