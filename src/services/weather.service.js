@@ -1,32 +1,13 @@
-import { ResourceTypes, ApiKey } from '../utils/constants';
-
-const BASE_URL =
-  process.env.REACT_APP_NODE_ENV !== 'development'
-    ? 'https://dataservice.accuweather.com/'
-    : '//localhost:3000/api/weather';
+const BASE_URL = `https://rickandmortyapi.com/api`;
 
 export const weatherService = {
-  getCurrentConditions,
-  getDailyForecast,
-  getSearchResults,
+  getSomething,
 };
 
-async function getCurrentConditions(locationKey) {
-  const url = `${BASE_URL}${ResourceTypes.CurrentConditions}${locationKey}?apikey=${ApiKey}`;
+async function getSomething() {
+  const url = `${BASE_URL}`;
   const res = await _get(url);
   return res[0];
-}
-
-async function getDailyForecast(locationKey) {
-  const url = `${BASE_URL}${ResourceTypes.FiveDays}${locationKey}?apikey=${ApiKey}&metric=true`;
-  const res = await _get(url);
-  return res;
-}
-
-async function getSearchResults(searchBy) {
-  const url = `${BASE_URL}${ResourceTypes.Autocomplete}?apikey=${ApiKey}&metric=true&q=${searchBy}`;
-  const res = await _get(url);
-  return res;
 }
 
 async function _get(url) {

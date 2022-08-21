@@ -8,9 +8,7 @@
 @import 'basics/layout';
 
 // Pages
-@import 'pages/WeatherPage';
-@import 'pages/FavoritesPage';
+@import 'pages/Home';
 
 // Components
-@import 'cmps/WeatherSearch';
-@import 'cmps/WeatherCard';
+@import 'cmps/AppHeader';
