@@ -2,31 +2,25 @@ import { useEffect, useState } from 'react';
 import { rickAndMortyApi } from '../services/api.service';
 import { rickAndMortyService } from '../services/rickAndMorty.service';
 import { ResourceTypes } from '../utils/constants';
+import { CharacterTable } from './CharacterTable';
 
-export const UnpopularCharFromLocation = ({ targetLocation = 'Earth (C-137)' }) => {
-  const [charToDisplay, setCharToDisplay] = useState({
-    charName: '',
-    originName: '',
-    originDimension: '',
-    popularity: '',
-  });
-  const [chars, setChars] = useState([]);
-  const [error, setError] = useState(null);
+export const UnpopularCharFromLocation = ({ locationName = 'Earth (C-137)' }) => {
+  const [charToDisplay, setCharToDisplay] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // findUnpopularCharacterFromLocation(targetLocation);
-    findUnpopularCharacterFromLocation2(targetLocation);
+    findUnpopularCharacterFromLocation(locationName);
   }, []);
 
-  const findUnpopularCharacterFromLocation2 = async (targetLocation) => {
+  const findUnpopularCharacterFromLocation = async (locationName) => {
     setIsLoading(true);
     try {
-      const location = await getLocationByName(targetLocation);
+      const location = await getLocationByName(locationName);
       const characterIds = getCharIdsFromLocation(location);
       const characters = await getCharactersByIds(characterIds);
       const charMapByEpisodes = characters.reduce((acc, character) => {
-        if (character.origin.name === targetLocation) {
+        if (character.origin.name === locationName) {
           const episodeCount = character.episode.length;
           if (!acc.has(episodeCount)) acc.set(episodeCount, []);
           const prevVal = acc.get(episodeCount);
@@ -36,8 +30,7 @@ export const UnpopularCharFromLocation = ({ targetLocation = 'Earth (C-137)' }) 
       }, new Map());
       const lowestNumOfEpisodes = Math.min(...charMapByEpisodes.keys());
       const targetCharacter = charMapByEpisodes.get(lowestNumOfEpisodes)[0];
-      console.log('targetCharacter:', targetCharacter);
-      setCharToDisplay(targetCharacter);
+      setCharToDisplay(prepCharToDisplay(targetCharacter, location));
     } catch (err) {
       setError(err);
       console.log('Error getting character: ', error);
@@ -62,36 +55,24 @@ export const UnpopularCharFromLocation = ({ targetLocation = 'Earth (C-137)' }) 
     return res;
   };
 
-  const findUnpopularCharacterFromLocation = async (targetLocation) => {
-    setIsLoading(true);
-    try {
-      const location = await rickAndMortyApi.getLocationByName(targetLocation);
-      const characterIds = getCharIdsFromLocation(location);
-      const characters = await rickAndMortyApi.getCharactersByIds(characterIds);
-      const unpopularCharacter = findCharWithMinEpisodes(characters);
-      setCharToDisplay(unpopularCharacter);
-    } catch (err) {
-      setError(err);
-      console.log('Error getting character: ', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const getCharIdsFromLocation = (location) => {
-    const residents = location[0].residents || [];
+    const residents = location.residents || [];
     const residentsIds = residents.map((url) => url.split('/').pop());
     return residentsIds;
   };
 
-  const findCharWithMinEpisodes = (chars) => {
-    return chars.reduce((prev, curr) => (prev.episode.length < curr.episode.length ? prev : curr));
+  const prepCharToDisplay = (char, location) => {
+    let charToReturn = rickAndMortyService.getEmptyCharacter();
+    charToReturn.name = char.name;
+    charToReturn.origin = char.origin.name;
+    charToReturn.popularity = char.episode.length;
+    charToReturn.dimension = location.dimension;
+    return charToReturn;
   };
 
   return (
     <div>
-      <h1>UnpopularChar</h1>
-      {charToDisplay.id && <pre>{JSON.stringify(charToDisplay, null, 2)}</pre>}
+      <CharacterTable character={charToDisplay} />
       {isLoading && <h2>Loading character</h2>}
     </div>
   );

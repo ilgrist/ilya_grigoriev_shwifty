@@ -1,4 +1,5 @@
 import { ResourceTypes } from '../utils/constants';
+
 export const rickAndMortyService = {
   getFilterBy,
   getEmptyCharacter,

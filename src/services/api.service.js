@@ -1,7 +1,7 @@
 import targetLocation from '../data/earth-c-137.json';
 import targetCharacters from '../data/characters.json';
 import allCharacters from '../data/allCharacters.json';
-import { BASE_URL, isProduction } from '../utils/constants';
+import { BASE_URL, isProduction, ResourceTypes } from '../utils/constants';
 
 export const rickAndMortyApi = {
   get,
@@ -11,13 +11,14 @@ export const rickAndMortyApi = {
 
 async function get(payload) {
   let res = {};
+  const { resourceType, filterBy } = payload;
   if (isProduction) {
-    const { resourceType, filterBy } = payload;
     const url = _buildUrlForGet(resourceType, filterBy);
     const data = await _getFromApi(url);
-    res = data.results;
+    res = data.results[0];
   } else {
-    res = allCharacters;
+    if (resourceType === ResourceTypes.location) return targetLocation.results[0];
+    if (resourceType === ResourceTypes.character) return targetCharacters;
   }
   return res;
 }
@@ -63,39 +64,6 @@ function _buildUrlForGet(resourceType, filterBy) {
   const url = `${BASE_URL}/${resourceType}/${queryStr}`;
   return url;
 }
-
-// async function getCharacters() {
-//   let res = {};
-//   if (isProduction) {
-//     const url = `${BASE_URL}/character/}`;
-//     res = await _getFromApi(url);
-//   } else {
-//     res = allCharacters;
-//   }
-//   return res;
-// }
-
-// async function getLocationByName(locationName = '') {
-//   let res = {};
-//   if (isProduction) {
-//     const url = `${BASE_URL}/location/?name=${locationName}`;
-//     res = await _getFromApi(url);
-//   } else {
-//     res = targetLocation;
-//   }
-//   return res;
-// }
-
-// async function getCharactersByIds(characters = []) {
-//   let res = {};
-//   if (isProduction) {
-//     const url = `${BASE_URL}/character/${characters.toString()}`;
-//     res = await _getFromApi(url);
-//   } else {
-//     res = targetCharacters;
-//   }
-//   return res;
-// }
 
 async function _getFromApi(url) {
   try {
