@@ -41,7 +41,7 @@ export const UnpopularCharFromLocation = ({ locationName = 'Earth (C-137)' }) =>
 
   const getLocationByName = async (locationName) => {
     const resourceType = ResourceTypes.location;
-    const filterBy = rickAndMortyService.getFilterBy(resourceType);
+    const filterBy = rickAndMortyService.getEmptyFilterBy(resourceType);
     filterBy.name = locationName;
     const payload = { resourceType, filterBy };
     const res = await rickAndMortyApi.get(payload);
@@ -72,8 +72,8 @@ export const UnpopularCharFromLocation = ({ locationName = 'Earth (C-137)' }) =>
 
   return (
     <div>
-      <CharacterTable character={charToDisplay} />
-      {isLoading && <h2>Loading character</h2>}
+      {isLoading && <h2>Loading character...</h2>}
+      {charToDisplay && !isLoading && <CharacterTable character={charToDisplay} />}
     </div>
   );
 };
