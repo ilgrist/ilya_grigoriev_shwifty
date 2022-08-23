@@ -3,8 +3,8 @@ export const Chart = ({ chartData }) => {
     const { popularity } = character;
     const columnHeight = calcColumnHeight(popularity);
     return (
-      <div style={{ width: '50px', height: columnHeight, backgroundColor: 'red' }}>
-        {character.name}
+      <div style={{ width: '100px', height: columnHeight, backgroundColor: 'red' }}>
+        {character.name} {popularity}
       </div>
     );
   };
@@ -19,7 +19,7 @@ export const Chart = ({ chartData }) => {
   return (
     <div>
       {chartData && (
-        <div className="popularity-chart flex-center">
+        <div className="popularity-chart">
           {chartData.map((character, idx) => (
             <Column character={character} key={idx} />
           ))}
