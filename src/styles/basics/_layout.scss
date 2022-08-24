@@ -17,10 +17,6 @@
     max-width: $normal-breakpoint;
   }
 
-  @include from-normal-layout {
-    max-width: $tablet-breakpoint;
-  }
-
   @include from-wide-layout {
     max-width: $wide-breakpoint;
   }

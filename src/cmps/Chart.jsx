@@ -23,7 +23,7 @@ export const Chart = ({ chartData, isLoading }) => {
     const { x, y, color } = item;
     const columnHeight = calcColumnHeight(y);
     return (
-      <div className="chart-column">
+      <div className="column">
         {/* <div className="column-title">{x}</div> */}
         <div className="column-body" style={{ height: columnHeight, backgroundColor: color }}></div>
         <div className="column-y-value">{y}</div>
@@ -67,13 +67,13 @@ export const Chart = ({ chartData, isLoading }) => {
         <div className="chart-title flex-center">
           <span className="txt">{data.title}</span>
         </div>
-        <div className="chart-y-axis">
-          <span className="txt">{data.axis.y}</span>
-        </div>
         <div className="chart">
-          {data.data.map((item, idx) => (
-            <Column item={item} key={idx} />
-          ))}
+          <span className="y-title">{data.axis.y}</span>
+          <div className="columns">
+            {data.data.map((item, idx) => (
+              <Column item={item} key={idx} />
+            ))}
+          </div>
         </div>
         <Legend />
       </div>
