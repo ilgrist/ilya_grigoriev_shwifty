@@ -1,30 +1,38 @@
-export const Chart = ({ chartData }) => {
-  const Column = ({ character }) => {
-    const { popularity } = character;
-    const columnHeight = calcColumnHeight(popularity);
+export const Chart = ({ chartData, isLoading }) => {
+  const Column = ({ entry }) => {
+    const { x, y } = entry;
+    const columnHeight = calcColumnHeight(y);
     return (
-      <div style={{ width: '100px', height: columnHeight, backgroundColor: 'red' }}>
-        {character.name} {popularity}
+      <div className="chart-column">
+        <div className="column-title">{entry.x}</div>
+        <div className="column-body" style={{ height: columnHeight }}></div>
+        <div className="column-y-value">{entry.y}</div>
       </div>
     );
   };
 
-  const calcColumnHeight = (popularity) => {
-    const popArr = chartData.map((char) => char.popularity);
-    const maxHeight = Math.max(...popArr);
-    const columnHeight = Math.floor((popularity / maxHeight) * 100);
+  const calcColumnHeight = (columnData) => {
+    const yDataArr = chartData.data.map((entry) => entry.y);
+    const maxHeight = Math.max(...yDataArr);
+    const columnHeight = Math.floor((columnData / maxHeight) * 100);
     return `${columnHeight}%`;
   };
 
-  return (
-    <div>
-      {chartData && (
-        <div className="popularity-chart">
-          {chartData.map((character, idx) => (
-            <Column character={character} key={idx} />
+  if (isLoading) {
+    return <div>Loading chart data...</div>;
+  }
+  if (!isLoading && chartData)
+    return (
+      <div className="chart-cont">
+        <span className="x-axis flex-center">{chartData.axis.x}</span>
+        <span className="y-axis">{chartData.axis.y}</span>
+        <span className="chart-title flex-center">{chartData.title}</span>
+        <div className="chart">
+          {chartData.data.map((entry, idx) => (
+            <Column entry={entry} key={idx} />
           ))}
         </div>
-      )}
-    </div>
-  );
+      </div>
+    );
+  return <div>No data to show...</div>;
 };

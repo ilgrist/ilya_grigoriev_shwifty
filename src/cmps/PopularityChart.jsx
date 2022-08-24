@@ -15,15 +15,9 @@ export const PopularityChart = () => {
   const getCharacters = async () => {
     setIsLoading(true);
     try {
-      //   const characters = [
-      //     'Rick Sanchez',
-      //     'Summer Smith',
-      //     'Morty Smith',
-      //     'Beth Smith',
-      //     'Jerry Smith',
-      //   ];
-      //   const prms = characters.map((char) => rickAndMortyService.getCharacterByName(char));
-      //   const chartData = await Promise.all(prms);
+      // const characters = rickAndMortyService.getChartCharacters();
+      // const prms = characters.map((char) => rickAndMortyService.getCharacterByName(char));
+      // const chartData = await Promise.all(prms);
       const data = prepChartData(characters);
       setChartData(data);
     } catch (error) {
@@ -35,17 +29,20 @@ export const PopularityChart = () => {
   };
 
   const prepChartData = (characterData) => {
-    const data = characterData.map((character) => {
-      return { name: character.name, popularity: character.episode.length };
+    const d = rickAndMortyService.getChartDataModel();
+    d.title = 'Most popular characters';
+    d.axis.x = 'Character name';
+    d.axis.y = 'Popularity (episode num.)';
+    d.data = characterData.map((character) => {
+      return { x: character.name, y: character.episode.length };
     });
-    return data;
+    return d;
   };
 
   return (
     <div>
-      {chartData && !isLoading && <pre>{JSON.stringify(chartData, null, 2)}</pre>}
-      {isLoading && <h2>Loading character...</h2>}
-      {chartData && <Chart chartData={chartData} />}
+      {isLoading && <h2>Loading chart...</h2>}
+      {chartData && <Chart chartData={chartData} isLoading={isLoading} />}
     </div>
   );
 };
