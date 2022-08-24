@@ -40,7 +40,7 @@ export const Chart = ({ chartData, isLoading }) => {
 
   const Legend = () => {
     return (
-      <div className="chart-legend flex-center">
+      <div className="chart-legend">
         {data.data.map((item, idx) => (
           <LegendItem item={item} key={idx} />
         ))}
@@ -66,6 +66,9 @@ export const Chart = ({ chartData, isLoading }) => {
       <div className="chart-cont">
         <div className="chart-title flex-center">
           <span className="txt">{data.title}</span>
+        </div>
+        <div className="chart-y-axis">
+          <span className="txt">{data.axis.y}</span>
         </div>
         <div className="chart">
           {data.data.map((item, idx) => (

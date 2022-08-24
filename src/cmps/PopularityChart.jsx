@@ -32,7 +32,7 @@ export const PopularityChart = () => {
     const d = rickAndMortyService.getChartDataModel();
     d.title = 'Most popular characters';
     d.axis.x = 'Character name';
-    d.axis.y = 'Popularity (episode num.)';
+    d.axis.y = 'Episode #';
     d.data = characterData.map((character) => {
       return { x: character.name, y: character.episode.length };
     });
