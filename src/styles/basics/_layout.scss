@@ -1,22 +1,22 @@
-.app {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+// .app {
+//   height: 100vh;
+//   display: flex;
+//   flex-direction: column;
+// }
 
-.main {
-  flex-grow: 1;
-}
+// .main {
+//   flex-grow: 1;
+// }
 
 .container {
-  max-width: $normal-breakpoint;
+  max-width: inherit;
   margin: 0 auto;
   padding-left: 10px;
   padding-right: 10px;
   padding: 20px;
 
   @include from-mobile-layout {
-    max-width: initial;
+    max-width: $normal-breakpoint;
   }
 
   @include from-normal-layout {

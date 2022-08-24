@@ -2,8 +2,10 @@ export const CharacterTable = ({ character }) => {
   const { name, origin, dimension, popularity } = character;
   return (
     <table>
-      <tbody>
+      <thead>
         <th style={{ float: 'left' }}>Unpopular</th>
+      </thead>
+      <tbody>
         <tr>
           <td>Character name</td>
           <td>{name}</td>

@@ -3,15 +3,15 @@
 }
 
 html {
-  font-family: OpenSans, sans-serif;
+  font-family: Roboto;
   font-size: 16px;
   scroll-behavior: smooth;
   margin: 0;
   padding: 0;
-  display: flex;
-  @include from-mobile-layout {
-    display: block;
-  }
+  // display: flex;
+  // @include from-mobile-layout {
+  //   display: block;
+  // }
 }
 
 body {

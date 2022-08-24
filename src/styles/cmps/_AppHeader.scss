@@ -1,4 +1,13 @@
 .app-header {
-  height: 80px;
-  background-color: aquamarine;
+  .header-img {
+    background-image: url('../../assets/imgs/hero-mobile.png');
+    // @include from-mobile-layout {
+    //   background-image: url('../../assets/imgs/hero.png');
+    // }
+    height: 225px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
 }

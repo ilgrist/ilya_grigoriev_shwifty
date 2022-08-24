@@ -6,7 +6,7 @@
 }
 
 @mixin from-normal-layout {
-  @media (min-width: $tablet-breakpoint) {
+  @media (min-width: $normal-breakpoint) {
     @content;
   }
 }

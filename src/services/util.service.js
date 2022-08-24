@@ -3,6 +3,7 @@ export const utilService = {
   loadFromStorage,
   debounce,
   makeId,
+  getRandomColor,
 };
 
 function saveToStorage(key, value) {
@@ -35,4 +36,13 @@ function makeId(length = 10) {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
   return text;
+}
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }

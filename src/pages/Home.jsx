@@ -5,7 +5,7 @@ export const Home = () => {
   return (
     <div className="container">
       Home
-      {/* <UnpopularCharFromLocation /> */}
+      <UnpopularCharFromLocation />
       <hr />
       <PopularityChart></PopularityChart>
     </div>
