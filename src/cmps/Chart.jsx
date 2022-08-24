@@ -40,7 +40,7 @@ export const Chart = ({ chartData, isLoading }) => {
 
   const Legend = () => {
     return (
-      <div className="chart-legend">
+      <div className="chart-legend flex-center">
         {data.data.map((item, idx) => (
           <LegendItem item={item} key={idx} />
         ))}

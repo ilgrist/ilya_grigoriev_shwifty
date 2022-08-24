@@ -31,74 +31,79 @@
     }
   }
   .chart-legend {
-    font-size: 12px;
+    font-size: 16px;
     display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1em;
     .chart-legend-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 0.2em;
+      gap: 0.5em;
       .color-square {
         height: 1em;
         width: 1em;
+        border-radius: 50%;
       }
       .txt {
-        text-align: center;
+        // text-align: left;
       }
     }
   }
-  @include from-mobile-layout {
-    display: grid;
-    height: 600px;
-    grid-template-columns: 90px 1fr;
-    grid-template-rows: 40px 1fr 40px;
+  // @include from-mobile-layout {
+  //   display: grid;
+  //   height: 600px;
+  //   grid-template-columns: 90px 1fr;
+  //   grid-template-rows: 40px 1fr 40px;
 
-    background-color: aquamarine;
-    padding: 10px;
+  //   background-color: aquamarine;
+  //   padding: 10px;
 
-    .x-axis {
-      grid-column: 1/3;
-      grid-row: 3/4;
-      border-top: 1px solid black;
-    }
-    .y-axis {
-      grid-column: 1/2;
-      grid-row: 2/4;
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      border-right: 1px solid black;
-    }
-    .chart-title {
-      grid-column: 1/3;
-      grid-row: 1/2;
-    }
-    .chart {
-      grid-column: 2/3;
-      grid-row: 2/3;
-      width: 100%;
-      display: flex;
-      gap: 50px;
-      justify-content: center;
-      align-items: flex-end;
-      padding: 10px;
-      .chart-column {
-        height: 100%;
-        display: flex;
-        flex-direction: column-reverse;
-        min-width: 75px;
+  //   .x-axis {
+  //     grid-column: 1/3;
+  //     grid-row: 3/4;
+  //     border-top: 1px solid black;
+  //   }
+  //   .y-axis {
+  //     grid-column: 1/2;
+  //     grid-row: 2/4;
+  //     display: flex;
+  //     align-items: center;
+  //     padding: 10px;
+  //     border-right: 1px solid black;
+  //   }
+  //   .chart-title {
+  //     grid-column: 1/3;
+  //     grid-row: 1/2;
+  //   }
+  //   .chart {
+  //     grid-column: 2/3;
+  //     grid-row: 2/3;
+  //     width: 100%;
+  //     display: flex;
+  //     gap: 50px;
+  //     justify-content: center;
+  //     align-items: flex-end;
+  //     padding: 10px;
+  //     .chart-column {
+  //       height: 100%;
+  //       display: flex;
+  //       flex-direction: column-reverse;
+  //       min-width: 75px;
 
-        .column-body {
-          background-color: red;
-        }
-        .column-y-value {
-          text-align: center;
-        }
-        .column-title {
-          text-align: center;
-          padding-top: 5px;
-        }
-      }
-    }
-  }
+  //       .column-body {
+  //         background-color: red;
+  //       }
+  //       .column-y-value {
+  //         text-align: center;
+  //       }
+  //       .column-title {
+  //         text-align: center;
+  //         padding-top: 5px;
+  //       }
+  //     }
+  //   }
+  // }
 }
