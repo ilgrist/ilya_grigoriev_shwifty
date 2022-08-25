@@ -1,21 +1,11 @@
 {
-  "short_name": "Weather",
-  "name": "My Weather app",
+  "short_name": "Rick and Morty task",
+  "name": "Time to get shwifty!",
   "icons": [
     {
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
-    },
-    {
-      "src": "sun-icon.png",
-      "type": "image/png",
-      "sizes": "25x24"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
     }
   ],
   "start_url": ".",
