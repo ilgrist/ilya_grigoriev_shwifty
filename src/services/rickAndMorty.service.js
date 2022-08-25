@@ -1,32 +1,26 @@
 import { ResourceTypes } from '../utils/constants';
 import { rickAndMortyApi } from './api.service';
+import { localStorageService } from '../services/async-storage-service';
 
 export const rickAndMortyService = {
-  getCharacterByName,
-  getLocationByName,
+  getResourceByName,
   getCharactersByIds,
-  getEmptyFilterBy,
   getEmptyCharacter,
   getChartCharacters,
   getChartDataModel,
 };
 
-async function getCharacterByName(characterName) {
-  const resourceType = ResourceTypes.character;
-  let filterBy = getEmptyFilterBy(resourceType);
-  filterBy.name = characterName;
-  const payload = { resourceType, filterBy };
-  const res = await rickAndMortyApi.get(payload);
-  return res;
-}
-
-async function getLocationByName(locationName) {
-  const resourceType = ResourceTypes.location;
-  const filterBy = rickAndMortyService.getEmptyFilterBy(resourceType);
-  filterBy.name = locationName;
-  const payload = { resourceType, filterBy };
-  const res = await rickAndMortyApi.get(payload);
-  return res;
+async function getResourceByName(resourceType = ResourceTypes.character, name = '') {
+  let res = await localStorageService.getByName(resourceType, name);
+  if (!res) {
+    const filterBy = _getEmptyFilterBy(resourceType);
+    filterBy.name = name;
+    const payload = { resourceType, filterBy };
+    res = await rickAndMortyApi.get(payload);
+    return await localStorageService.post(resourceType, res);
+  } else {
+    return res;
+  }
 }
 
 async function getCharactersByIds(ids) {
@@ -36,7 +30,7 @@ async function getCharactersByIds(ids) {
   return res;
 }
 
-function getEmptyFilterBy(resourceType) {
+function _getEmptyFilterBy(resourceType) {
   switch (resourceType) {
     case ResourceTypes.location:
       return {

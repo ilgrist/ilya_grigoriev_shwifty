@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { rickAndMortyApi } from '../services/api.service';
 import { rickAndMortyService } from '../services/rickAndMorty.service';
 import { ResourceTypes } from '../utils/constants';
 import { CharacterTable } from './CharacterTable';
@@ -16,7 +15,10 @@ export const UnpopularCharFromLocation = ({ locationName = 'Earth (C-137)' }) =>
   const findUnpopularCharacterFromLocation = async (locationName) => {
     setIsLoading(true);
     try {
-      const location = await rickAndMortyService.getLocationByName(locationName);
+      const location = await rickAndMortyService.getResourceByName(
+        ResourceTypes.location,
+        locationName
+      );
       const characterIds = getCharIdsFromLocation(location);
       const characters = await rickAndMortyService.getCharactersByIds(characterIds);
       const charMapByEpisodes = getCharMapByEpisodes(characters);

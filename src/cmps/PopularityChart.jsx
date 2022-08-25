@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { rickAndMortyService } from '../services/rickAndMorty.service';
 import characters from '../data/chartChars.json';
 import { Chart } from './Chart';
+import { ResourceTypes } from '../utils/constants';
 
 export const PopularityChart = () => {
   const [chartData, setChartData] = useState(null);
@@ -15,11 +16,15 @@ export const PopularityChart = () => {
   const getCharacters = async () => {
     setIsLoading(true);
     try {
-      // const characters = rickAndMortyService.getChartCharacters();
-      // const prms = characters.map((char) => rickAndMortyService.getCharacterByName(char));
-      // const chartData = await Promise.all(prms);
-      const data = prepChartData(characters);
+      const charNames = rickAndMortyService.getChartCharacters();
+      const prms = charNames.map((charName) =>
+        rickAndMortyService.getResourceByName(ResourceTypes.character, charName)
+      );
+      const charData = await Promise.all(prms);
+      const data = prepChartData(charData);
       setChartData(data);
+      // const data = prepChartData(characters);
+      // setChartData(data);
     } catch (error) {
       setError(error);
       console.log("Couldn't get char data: ", error);
