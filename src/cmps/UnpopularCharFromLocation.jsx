@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { rickAndMortyService } from '../services/rickAndMorty.service';
 import { ResourceTypes } from '../utils/constants';
 import { CharacterTable } from './CharacterTable';
 
-export const UnpopularCharFromLocation = ({ locationName = 'Earth (C-137)' }) => {
+const _UnpopularCharFromLocation = ({ locationName }) => {
   const [charToDisplay, setCharToDisplay] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -75,3 +75,5 @@ export const UnpopularCharFromLocation = ({ locationName = 'Earth (C-137)' }) =>
     </div>
   );
 };
+
+export const UnpopularCharFromLocation = React.memo(_UnpopularCharFromLocation);
