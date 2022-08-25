@@ -16,18 +16,3 @@ body {
     max-width: $wide-breakpoint;
   }
 }
-
-// GRIDS
-.simple-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap: 10px;
-}
-
-.specific-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, 200px);
-  grid-gap: 10px;
-  margin: 40px;
-  justify-content: center;
-}

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { rickAndMortyService } from '../services/rickAndMorty.service';
-import characters from '../data/chartChars.json';
 import { Chart } from './Chart';
 import { ResourceTypes } from '../utils/constants';
 
@@ -23,8 +22,6 @@ export const PopularityChart = () => {
       const charData = await Promise.all(prms);
       const data = prepChartData(charData);
       setChartData(data);
-      // const data = prepChartData(characters);
-      // setChartData(data);
     } catch (error) {
       setError(error);
       console.log("Couldn't get char data: ", error);
@@ -37,7 +34,7 @@ export const PopularityChart = () => {
     const d = rickAndMortyService.getChartDataModel();
     d.title = 'Most popular characters';
     d.axis.x = 'Character name';
-    d.axis.y = 'Episode #';
+    d.axis.y = 'Num. of episodes';
     d.data = characterData.map((character) => {
       return { x: character.name, y: character.episode.length };
     });

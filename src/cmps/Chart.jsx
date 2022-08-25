@@ -24,7 +24,6 @@ export const Chart = ({ chartData, isLoading }) => {
     const columnHeight = calcColumnHeight(y);
     return (
       <div className="column">
-        {/* <div className="column-title">{x}</div> */}
         <div className="column-body" style={{ height: columnHeight, backgroundColor: color }}></div>
         <div className="column-y-value">{y}</div>
       </div>
