@@ -9,6 +9,9 @@ body {
   padding: 10px;
 
   @include from-mobile-layout {
+    max-width: $mobile-breakpoint;
+  }
+  @include from-normal-layout {
     max-width: $normal-breakpoint;
   }
 
