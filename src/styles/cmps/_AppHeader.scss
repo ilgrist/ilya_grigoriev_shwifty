@@ -2,19 +2,21 @@
   .header-img {
     height: auto;
     width: 100%;
-    background-image: url('../../assets/imgs/hero-mobile.png');
+    background-image: url('../../assets/imgs/hero-new.png');
     height: 120px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
     @include from-mobile-layout {
-      background-image: url('../../assets/imgs/hero-normal.png');
+      background-size: 70%;
       height: 200px;
     }
+    @include from-normal-layout {
+      background-size: 50%;
+    }
     @include from-wide-layout {
-      background-image: url('../../assets/imgs/hero.png');
-      height: 240px;
+      background-size: 38%;
     }
   }
 }

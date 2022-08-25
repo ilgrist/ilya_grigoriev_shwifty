@@ -3,7 +3,7 @@ import { UnpopularCharFromLocation } from '../cmps/UnpopularCharFromLocation';
 
 export const Home = () => {
   return (
-    <div className="container homepage">
+    <div className="home container">
       <UnpopularCharFromLocation />
       <hr />
       <PopularityChart />
