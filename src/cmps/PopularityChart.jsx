@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { rickAndMortyService } from '../services/rickAndMorty.service';
 import { Chart } from './Chart';
 import { ResourceTypes } from '../utils/constants';
 
-export const _PopularityChart = ({ charNames }) => {
+export const PopularityChart = () => {
   const [chartData, setChartData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -15,6 +15,7 @@ export const _PopularityChart = ({ charNames }) => {
   const getCharacters = async () => {
     setIsLoading(true);
     try {
+      const charNames = rickAndMortyService.getChartCharacters();
       const prms = charNames.map((charName) =>
         rickAndMortyService.getResourceByName(ResourceTypes.character, charName)
       );
@@ -47,5 +48,3 @@ export const _PopularityChart = ({ charNames }) => {
     </div>
   );
 };
-
-export const PopularityChart = React.memo(_PopularityChart);

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { rickAndMortyService } from '../services/rickAndMorty.service';
 import { ResourceTypes } from '../utils/constants';
 import { CharacterTable } from './CharacterTable';
 
-const _UnpopularCharFromLocation = ({ locationName }) => {
+export const UnpopularCharFromLocation = ({ locationName = 'Earth (C-137)' }) => {
   const [charToDisplay, setCharToDisplay] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -24,9 +24,8 @@ const _UnpopularCharFromLocation = ({ locationName }) => {
         ResourceTypes.character,
         characterIds
       );
-      const charMapByEpisodes = getCharMapByEpisodes(characters);
-      const lowestNumOfEpisodes = Math.min(...charMapByEpisodes.keys());
-      const targetCharacter = charMapByEpisodes.get(lowestNumOfEpisodes)[0];
+      const sortedCahracters = characters.sort((a, b) => a.episode.length - b.episode.length);
+      const targetCharacter = sortedCahracters[0];
       setCharToDisplay(prepCharToDisplay(targetCharacter, location));
     } catch (err) {
       setError(err);
@@ -34,18 +33,6 @@ const _UnpopularCharFromLocation = ({ locationName }) => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const getCharMapByEpisodes = (characters) => {
-    return characters.reduce((acc, character) => {
-      if (character.origin.name === locationName) {
-        const episodeCount = character.episode.length;
-        if (!acc.has(episodeCount)) acc.set(episodeCount, []);
-        const prevVal = acc.get(episodeCount);
-        acc.set(episodeCount, [...prevVal, character]);
-      }
-      return acc;
-    }, new Map());
   };
 
   const getCharIdsFromLocation = (location) => {
@@ -75,5 +62,3 @@ const _UnpopularCharFromLocation = ({ locationName }) => {
     </div>
   );
 };
-
-export const UnpopularCharFromLocation = React.memo(_UnpopularCharFromLocation);
