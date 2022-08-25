@@ -73,7 +73,12 @@ export const UnpopularCharFromLocation = ({ locationName = 'Earth (C-137)' }) =>
   return (
     <div>
       {isLoading && <h2>Loading character...</h2>}
-      {charToDisplay && !isLoading && <CharacterTable character={charToDisplay} />}
+      {charToDisplay && !isLoading && (
+        <CharacterTable
+          character={charToDisplay}
+          title={`The most unpopular character from ${locationName}`}
+        />
+      )}
     </div>
   );
 };

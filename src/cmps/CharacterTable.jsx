@@ -1,10 +1,8 @@
-export const CharacterTable = ({ character }) => {
+export const CharacterTable = ({ character, title }) => {
   const { name, origin, dimension, popularity } = character;
   return (
-    <table>
-      <thead>
-        <th style={{ float: 'left' }}>Unpopular</th>
-      </thead>
+    <table className="character-table">
+      <caption className="title">{title}</caption>
       <tbody>
         <tr>
           <td>Character name</td>
