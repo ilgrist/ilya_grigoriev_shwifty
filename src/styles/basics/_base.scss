@@ -8,10 +8,6 @@ html {
   scroll-behavior: smooth;
   margin: 0;
   padding: 0;
-  // display: flex;
-  // @include from-mobile-layout {
-  //   display: block;
-  // }
 }
 
 body {
@@ -53,24 +49,4 @@ button {
 input {
   font-family: inherit;
   text-align: inherit;
-}
-
-// MAC like scrollbar
-::-webkit-scrollbar {
-  width: 8px;
-  background-color: rgba(0, 0, 0, 0);
-  -webkit-border-radius: 100px;
-}
-
-::-webkit-scrollbar:hover {
-  background-color: rgba(0, 0, 0, 0.09);
-}
-
-::-webkit-scrollbar-thumb:vertical {
-  background: rgba(0, 0, 0, 0.5);
-  -webkit-border-radius: 100px;
-}
-
-::-webkit-scrollbar-thumb:vertical:active {
-  -webkit-border-radius: 100px;
 }

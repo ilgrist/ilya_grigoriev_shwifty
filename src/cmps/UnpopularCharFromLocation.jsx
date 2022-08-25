@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { rickAndMortyService } from '../services/rickAndMorty.service';
 import { ResourceTypes } from '../utils/constants';
 import { CharacterTable } from './CharacterTable';
-import characters from '../data/characters.json';
 
 export const UnpopularCharFromLocation = ({ locationName = 'Earth (C-137)' }) => {
   const [charToDisplay, setCharToDisplay] = useState(null);
@@ -21,10 +20,10 @@ export const UnpopularCharFromLocation = ({ locationName = 'Earth (C-137)' }) =>
         locationName
       );
       const characterIds = getCharIdsFromLocation(location);
-      // const characters = await rickAndMortyService.getResourceByIds(
-      //   ResourceTypes.character,
-      //   characterIds
-      // );
+      const characters = await rickAndMortyService.getResourceByIds(
+        ResourceTypes.character,
+        characterIds
+      );
       const charMapByEpisodes = getCharMapByEpisodes(characters);
       const lowestNumOfEpisodes = Math.min(...charMapByEpisodes.keys());
       const targetCharacter = charMapByEpisodes.get(lowestNumOfEpisodes)[0];
