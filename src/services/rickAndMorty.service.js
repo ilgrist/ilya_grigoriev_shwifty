@@ -4,7 +4,7 @@ import { localStorageService } from '../services/async-storage-service';
 
 export const rickAndMortyService = {
   getResourceByName,
-  getCharactersByIds,
+  getResourceByIds,
   getEmptyCharacter,
   getChartCharacters,
   getChartDataModel,
@@ -23,8 +23,7 @@ async function getResourceByName(resourceType = ResourceTypes.character, name = 
   }
 }
 
-async function getCharactersByIds(ids) {
-  const resourceType = ResourceTypes.character;
+async function getResourceByIds(resourceType, ids) {
   const payload = { resourceType, ids };
   const res = await rickAndMortyApi.getByIds(payload);
   return res;
