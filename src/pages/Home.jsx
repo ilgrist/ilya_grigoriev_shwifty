@@ -5,7 +5,6 @@ export const Home = () => {
   return (
     <div className="home container">
       <UnpopularCharFromLocation />
-      <hr />
       <PopularityChart />
     </div>
   );

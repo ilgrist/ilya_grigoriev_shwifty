@@ -3,24 +3,26 @@
   display: flex;
   flex-direction: column;
   height: 500px;
-  background-color: white;
-  padding: 10px 0;
+  padding-top: 10px;
   @include from-mobile-layout {
     font-size: 25px;
   }
   .chart-title {
     font-size: 1.5em;
     margin-bottom: 0.5rem;
+    font-family: Archivo;
   }
   .chart {
     flex-grow: 1;
     display: flex;
     margin-bottom: 1em;
+
     .y-title {
       font-size: 0.8em;
       text-align: center;
-      writing-mode: vertical-rl;
-      text-orientation: upright;
+
+      writing-mode: vertical-lr;
+      // text-orientation: sideways;
       padding: 0 0.5em;
     }
     .columns {
