@@ -16,18 +16,10 @@ export const UnpopularCharFromLocation = ({ locationName = 'Earth (C-137)' }) =>
   const findUnpopularCharacterFromLocation = async (locationName) => {
     setIsLoading(true);
     try {
-      const location = await getLocationByName(locationName);
+      const location = await rickAndMortyService.getLocationByName(locationName);
       const characterIds = getCharIdsFromLocation(location);
-      const characters = await getCharactersByIds(characterIds);
-      const charMapByEpisodes = characters.reduce((acc, character) => {
-        if (character.origin.name === locationName) {
-          const episodeCount = character.episode.length;
-          if (!acc.has(episodeCount)) acc.set(episodeCount, []);
-          const prevVal = acc.get(episodeCount);
-          acc.set(episodeCount, [...prevVal, character]);
-        }
-        return acc;
-      }, new Map());
+      const characters = await rickAndMortyService.getCharactersByIds(characterIds);
+      const charMapByEpisodes = getCharMapByEpisodes(characters);
       const lowestNumOfEpisodes = Math.min(...charMapByEpisodes.keys());
       const targetCharacter = charMapByEpisodes.get(lowestNumOfEpisodes)[0];
       setCharToDisplay(prepCharToDisplay(targetCharacter, location));
@@ -39,20 +31,16 @@ export const UnpopularCharFromLocation = ({ locationName = 'Earth (C-137)' }) =>
     }
   };
 
-  const getLocationByName = async (locationName) => {
-    const resourceType = ResourceTypes.location;
-    const filterBy = rickAndMortyService.getEmptyFilterBy(resourceType);
-    filterBy.name = locationName;
-    const payload = { resourceType, filterBy };
-    const res = await rickAndMortyApi.get(payload);
-    return res;
-  };
-
-  const getCharactersByIds = async (ids) => {
-    const resourceType = ResourceTypes.character;
-    const payload = { resourceType, ids };
-    const res = await rickAndMortyApi.getByIds(payload);
-    return res;
+  const getCharMapByEpisodes = (characters) => {
+    return characters.reduce((acc, character) => {
+      if (character.origin.name === locationName) {
+        const episodeCount = character.episode.length;
+        if (!acc.has(episodeCount)) acc.set(episodeCount, []);
+        const prevVal = acc.get(episodeCount);
+        acc.set(episodeCount, [...prevVal, character]);
+      }
+      return acc;
+    }, new Map());
   };
 
   const getCharIdsFromLocation = (location) => {
