@@ -1,5 +1,5 @@
 {
-  "name": "weather-app",
+  "name": "Shwifty",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -7,7 +7,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.3.3",
     "react-scripts": "5.0.1",
-    "sass": "^1.53.0",
+    "sass": "^1.54.5",
     "serve": "^14.0.1",
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
@@ -17,12 +17,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
