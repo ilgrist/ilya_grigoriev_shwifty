@@ -5,7 +5,6 @@ import { localStorageService } from '../services/async-storage-service';
 export const rickAndMortyService = {
   getResourceByName,
   getResourceByIds,
-  getEmptyCharacter,
   getChartCharacters,
   getChartDataModel,
   prepCharToDisplay,
@@ -69,10 +68,10 @@ function getChartDataModel() {
   };
 }
 
-const prepCharToDisplay = (char, location) => {
+function prepCharToDisplay(char, location) {
   const name = char.name;
   const origin = char.origin.name;
   const popularity = char.episode.length;
   const dimension = location.dimension;
   return { name, origin, popularity, dimension };
-};
+}

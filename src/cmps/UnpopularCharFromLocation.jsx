@@ -33,7 +33,9 @@ export const UnpopularCharFromLocation = ({ locationName = 'Earth (C-137)' }) =>
         setCharToDisplay(rickAndMortyService.prepCharToDisplay(targetCharacter, location));
       } catch (err) {
         setError(err);
-        console.log('Error getting character: ', error);
+        useEffect(() => {
+          if (error !== null) console.log('Error getting character: ', error);
+        }, [error]);
       } finally {
         setIsLoading(false);
       }
@@ -49,6 +51,7 @@ export const UnpopularCharFromLocation = ({ locationName = 'Earth (C-137)' }) =>
   return (
     <div>
       {isLoading && <h2>Loading character...</h2>}
+      {error && <h2>Error getting character</h2>}
       {charToDisplay && !isLoading && (
         <CharacterTable
           character={charToDisplay}
