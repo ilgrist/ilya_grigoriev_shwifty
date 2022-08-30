@@ -9,24 +9,29 @@ export const PopularityChart = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    getCharacters();
+    setIsLoading(true);
   }, []);
 
+  useEffect(() => {
+    getCharacters();
+  }, [isLoading]);
+
   const getCharacters = async () => {
-    setIsLoading(true);
-    try {
-      const charNames = rickAndMortyService.getChartCharacters();
-      const prms = charNames.map((charName) =>
-        rickAndMortyService.getResourceByName(ResourceTypes.character, charName)
-      );
-      const charData = await Promise.all(prms);
-      const data = prepChartData(charData);
-      setChartData(data);
-    } catch (error) {
-      setError(error);
-      console.log("Couldn't get char data: ", error);
-    } finally {
-      setIsLoading(false);
+    if (isLoading) {
+      try {
+        const charNames = rickAndMortyService.getChartCharacters();
+        const prms = charNames.map((charName) =>
+          rickAndMortyService.getResourceByName(ResourceTypes.character, charName)
+        );
+        const charData = await Promise.all(prms);
+        const data = prepChartData(charData);
+        setChartData(data);
+      } catch (error) {
+        setError(error);
+        console.log("Couldn't get char data: ", error);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 

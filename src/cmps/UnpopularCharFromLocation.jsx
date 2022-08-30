@@ -9,29 +9,34 @@ export const UnpopularCharFromLocation = ({ locationName = 'Earth (C-137)' }) =>
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    findUnpopularCharacterFromLocation(locationName);
+    setIsLoading(true);
   }, []);
 
+  useEffect(() => {
+    findUnpopularCharacterFromLocation(locationName);
+  }, [isLoading]);
+
   const findUnpopularCharacterFromLocation = async (locationName) => {
-    setIsLoading(true);
-    try {
-      const location = await rickAndMortyService.getResourceByName(
-        ResourceTypes.location,
-        locationName
-      );
-      const characterIds = getCharIdsFromLocation(location);
-      const characters = await rickAndMortyService.getResourceByIds(
-        ResourceTypes.character,
-        characterIds
-      );
-      const sortedCahracters = characters.sort((a, b) => a.episode.length - b.episode.length);
-      const targetCharacter = sortedCahracters[0];
-      setCharToDisplay(prepCharToDisplay(targetCharacter, location));
-    } catch (err) {
-      setError(err);
-      console.log('Error getting character: ', error);
-    } finally {
-      setIsLoading(false);
+    if (isLoading) {
+      try {
+        const location = await rickAndMortyService.getResourceByName(
+          ResourceTypes.location,
+          locationName
+        );
+        const characterIds = getCharIdsFromLocation(location);
+        const characters = await rickAndMortyService.getResourceByIds(
+          ResourceTypes.character,
+          characterIds
+        );
+        const sortedCahracters = characters.sort((a, b) => a.episode.length - b.episode.length);
+        const targetCharacter = sortedCahracters[0];
+        setCharToDisplay(prepCharToDisplay(targetCharacter, location));
+      } catch (err) {
+        setError(err);
+        console.log('Error getting character: ', error);
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
