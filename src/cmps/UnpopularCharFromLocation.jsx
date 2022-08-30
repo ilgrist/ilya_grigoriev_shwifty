@@ -28,9 +28,9 @@ export const UnpopularCharFromLocation = ({ locationName = 'Earth (C-137)' }) =>
           ResourceTypes.character,
           characterIds
         );
-        const sortedCahracters = characters.sort((a, b) => a.episode.length - b.episode.length);
-        const targetCharacter = sortedCahracters[0];
-        setCharToDisplay(prepCharToDisplay(targetCharacter, location));
+        const sortedCharacters = characters.sort((a, b) => a.episode.length - b.episode.length);
+        const targetCharacter = sortedCharacters[0];
+        setCharToDisplay(rickAndMortyService.prepCharToDisplay(targetCharacter, location));
       } catch (err) {
         setError(err);
         console.log('Error getting character: ', error);
@@ -44,15 +44,6 @@ export const UnpopularCharFromLocation = ({ locationName = 'Earth (C-137)' }) =>
     const residents = location.residents || [];
     const residentsIds = residents.map((url) => url.split('/').pop());
     return residentsIds;
-  };
-
-  const prepCharToDisplay = (char, location) => {
-    let charToReturn = rickAndMortyService.getEmptyCharacter();
-    charToReturn.name = char.name;
-    charToReturn.origin = char.origin.name;
-    charToReturn.popularity = char.episode.length;
-    charToReturn.dimension = location.dimension;
-    return charToReturn;
   };
 
   return (
