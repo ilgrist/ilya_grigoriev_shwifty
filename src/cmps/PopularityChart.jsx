@@ -3,6 +3,7 @@ import { rickAndMortyService } from '../services/rick-and-morty.service';
 import { Chart } from './Chart/Chart';
 import { ResourceTypes } from '../utils/constants';
 import { utilService } from '../services/util.service';
+import { userMsgService } from '../services/user-msg.service';
 
 export const PopularityChart = () => {
   const [chartData, setChartData] = useState(null);
@@ -17,6 +18,10 @@ export const PopularityChart = () => {
     getCharacters();
   }, [isLoading]);
 
+  useEffect(() => {
+    if (error) userMsgService.showError(error);
+  }, [error]);
+
   const getCharacters = async () => {
     if (isLoading) {
       try {
@@ -28,8 +33,11 @@ export const PopularityChart = () => {
         const data = prepChartData(charData);
         setChartData(data);
       } catch (error) {
-        setError(error);
-        console.log("Couldn't get char data: ", error);
+        const newError = {
+          msg: "Couldn't get characters for chart",
+          error,
+        };
+        setError(newError);
       } finally {
         setIsLoading(false);
       }
@@ -49,6 +57,7 @@ export const PopularityChart = () => {
   return (
     <div>
       {isLoading && <h2>Loading chart...</h2>}
+      {error && <h2>Error getting characters</h2>}
       {chartData && <Chart chartData={chartData} isLoading={isLoading} />}
     </div>
   );
