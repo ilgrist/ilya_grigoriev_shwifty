@@ -6,7 +6,6 @@ export const rickAndMortyService = {
   getResourceByName,
   getResourceByIds,
   getChartCharacters,
-  getChartDataModel,
   prepCharToDisplay,
 };
 
@@ -55,17 +54,6 @@ function _getEmptyFilterBy(resourceType) {
 
 function getChartCharacters() {
   return ['Rick Sanchez', 'Summer Smith', 'Morty Smith', 'Beth Smith', 'Jerry Smith'];
-}
-
-function getChartDataModel() {
-  return {
-    title: '',
-    axis: {
-      x: '',
-      y: '',
-    },
-    data: [],
-  };
 }
 
 function prepCharToDisplay(char, location) {

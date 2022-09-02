@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { rickAndMortyService } from '../services/rick-and-morty.service';
-import { Chart } from './Chart';
+import { Chart } from './Chart/Chart';
 import { ResourceTypes } from '../utils/constants';
+import { utilService } from '../services/util.service';
 
 export const PopularityChart = () => {
   const [chartData, setChartData] = useState(null);
@@ -36,14 +37,13 @@ export const PopularityChart = () => {
   };
 
   const prepChartData = (characterData) => {
-    const d = rickAndMortyService.getChartDataModel();
-    d.title = 'Most popular characters';
-    d.axis.x = 'Character name';
-    d.axis.y = 'Num. of episodes';
-    d.data = characterData.map((character) => {
+    const chartDataModel = utilService.getChartDataModel();
+    chartDataModel.title = 'Most popular characters';
+    chartDataModel.axis.y = 'Num. of episodes';
+    chartDataModel.items = characterData.map((character) => {
       return { x: character.name, y: character.episode.length };
     });
-    return d;
+    return chartDataModel;
   };
 
   return (

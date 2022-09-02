@@ -2,6 +2,7 @@ export const utilService = {
   saveToStorage,
   loadFromStorage,
   getRandomColor,
+  getChartDataModel,
 };
 
 function saveToStorage(key, value) {
@@ -20,4 +21,15 @@ function getRandomColor() {
     color += letters[Math.floor(Math.random() * 16)];
   }
   return color;
+}
+
+function getChartDataModel() {
+  return {
+    title: '',
+    axis: {
+      x: '',
+      y: '',
+    },
+    data: [],
+  };
 }
