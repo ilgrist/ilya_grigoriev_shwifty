@@ -1,6 +1,6 @@
 import { ResourceTypes } from '../utils/constants';
 import { rickAndMortyApi } from './api.service';
-import { localStorageService } from '../services/async-storage-service';
+import { localStorageService } from './async-storage.service';
 
 export const rickAndMortyService = {
   getResourceByName,

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { rickAndMortyService } from '../services/rickAndMorty.service';
+import { rickAndMortyService } from '../services/rick-and-morty.service';
 import { Chart } from './Chart';
 import { ResourceTypes } from '../utils/constants';
 
